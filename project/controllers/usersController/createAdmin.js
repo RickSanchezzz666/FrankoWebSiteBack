@@ -10,7 +10,7 @@ module.exports.createAdmin = async (req, res) => {
         
         const newAdmin = new UsersModel({ u_Id: idCount + 1, u_Login: login, u_Password: encryptedPassword, u_Fullname: fullname, u_AccessLevel: 1 });
         await newAdmin.save();
-        return res.status(200).send({message: "You successfully created a Admin!"});
+        return res.status(200).send({message: "You successfully created an Admin!"});
     } catch (error) {
         res.status(500).send({ message: "Internal server error: ", error })
     }
