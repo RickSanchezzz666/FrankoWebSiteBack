@@ -24,3 +24,7 @@
 ::1 - - [24/Nov/2023:16:14:55 +0000] "POST /api/createAdmin HTTP/1.1" 200 - "-" "PostmanRuntime/7.35.0"
 ::1 - - [24/Nov/2023:16:19:22 +0000] "POST /api/createAdmin HTTP/1.1" 500 127 "-" "PostmanRuntime/7.35.0"
 ::1 - - [24/Nov/2023:16:20:26 +0000] "POST /api/createAdmin HTTP/1.1" 200 - "-" "PostmanRuntime/7.35.0"
+::1 - - [24/Nov/2023:16:31:35 +0000] "POST /api/createAdmin HTTP/1.1" 200 - "-" "PostmanRuntime/7.35.0"
+::1 - - [24/Nov/2023:16:33:04 +0000] "POST /api/login HTTP/1.1" 400 41 "-" "PostmanRuntime/7.35.0"
+::1 - - [24/Nov/2023:16:33:22 +0000] "GET /api/login HTTP/1.1" 404 148 "-" "PostmanRuntime/7.35.0"
+::1 - - [24/Nov/2023:16:34:09 +0000] "POST /api/login HTTP/1.1" 200 204 "-" "PostmanRuntime/7.35.0"
