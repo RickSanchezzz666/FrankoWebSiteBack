@@ -5,5 +5,6 @@ const { apiWrapper } = require('../apiWrapper/index')
 const router = Router();
 
 router.post("/login", apiWrapper(UsersController.login));
+router.post("/createAdmin", apiWrapper(UsersController.createAdmin))
 
 module.exports = { router };
