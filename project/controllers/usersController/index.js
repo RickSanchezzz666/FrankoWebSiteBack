@@ -1,3 +1,4 @@
 module.exports.UsersController = {
-    ...require('./login')
+    ...require('./login'),
+    ...require('./createAdmin')
 }
