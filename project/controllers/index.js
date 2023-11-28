@@ -1,3 +1,4 @@
 module.exports = {
-    ...require('./usersController')
+    ...require('./usersController'),
+    ...require('./postsController')
 }
