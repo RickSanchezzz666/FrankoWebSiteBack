@@ -9,6 +9,7 @@ module.exports.createPost = async (req, res) => {
 
         const newPost = new ContentModel({p_Id: idCount + 1, p_Title, p_TextContent, p_ShortDescription, p_Photos, p_Timestamp})
         await newPost.save()
+        res.status(200).send({message: "Post succesfully created"})
     } catch (error) {
         res.status(500).send({ message: "Internal server error: ", error })
     }
