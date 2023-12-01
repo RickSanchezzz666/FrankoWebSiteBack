@@ -41,3 +41,4 @@
 ::1 - - [01/Dec/2023:17:35:09 +0000] "POST /api/createPost HTTP/1.1" 500 1401 "-" "PostmanRuntime/7.35.0"
 ::1 - - [01/Dec/2023:17:35:18 +0000] "POST /api/createPost HTTP/1.1" 500 1401 "-" "PostmanRuntime/7.35.0"
 ::1 - - [01/Dec/2023:17:36:52 +0000] "POST /api/createPost HTTP/1.1" 500 428 "-" "PostmanRuntime/7.35.0"
+::1 - - [01/Dec/2023:17:39:56 +0000] "POST /api/createPost HTTP/1.1" 200 38 "-" "PostmanRuntime/7.35.0"
