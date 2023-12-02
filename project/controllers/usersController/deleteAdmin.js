@@ -7,16 +7,14 @@ module.exports.deleteAdmin = async (req, res) => {
             if (!u_Id) {
                 return res.status(400).send({ message: "Parameter 'User Id' is required." })
             }
-            const superuser = await UsersModel.findOne({ u_Id });
-            if (superuser.u_AccessLevel === 1) {
+            const user = await UsersModel.findOne({ u_Id });
+            if (!user) {
+                return res.status(404).send({ message: "There are no entries with such 'User ID'." })
+            } if (user.u_AccessLevel === 1) {
                 return res.status(403).send({ message: "You can't delete superuser. Please contact technical administrator." });
             } else {
-                const user = await UsersModel.findOneAndDelete({ u_Id });
-                
-                if(!user) {
-                    return res.status(404).send({ message: "There are no entries with such 'User ID'." })
-                }
-                return res.status(200).send({ message: "User successfully deleted." });
+                const deletedUser = await UsersModel.findOneAndDelete({ u_Id });
+                return res.status(200).send({ message: `User '${deletedUser.u_Fullname}' successfully deleted.` });
             }
         } catch (error) {
             res.status(500).send({ message: "Internal server error: ", error })
