@@ -8,6 +8,10 @@ router.get("/admin/auth",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(UsersController.auth)
 );
+router.get("/admin/getUsers",
+    passport.authenticate('jwt', { session: false }),
+    apiWrapper(UsersController.getUsers)
+);
 router.post("/login", apiWrapper(UsersController.login));
 router.post("/admin/createAdmin",
     passport.authenticate('jwt', { session: false }),
