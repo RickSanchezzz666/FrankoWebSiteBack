@@ -20,6 +20,6 @@ const schema = new Schema({
     p_Timestamp: { type: Date, required: true }
 });
 
-const ContentModel = new model('content', schema)
+const ContentModel = new model('contents', schema)
 
 module.exports = { ContentModel };

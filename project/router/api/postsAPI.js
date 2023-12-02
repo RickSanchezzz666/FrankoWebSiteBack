@@ -8,5 +8,6 @@ router.post("/createPost",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(PostsController.createPost)
 );
+router.get("/getPosts", apiWrapper(PostsController.getPosts));
 
 module.exports = { router };

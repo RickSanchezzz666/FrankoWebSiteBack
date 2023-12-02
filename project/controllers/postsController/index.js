@@ -1,3 +1,4 @@
 module.exports.PostsController = {
-    ...require('./createPost')
+    ...require('./createPost'),
+    ...require('./getPosts')
 }
