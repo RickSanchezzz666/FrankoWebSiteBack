@@ -4,7 +4,7 @@ const { apiWrapper } = require('../apiWrapper/index');
 const passport = require('passport');
 const router = Router();
 
-router.post("/createPost",
+router.post("/admin/createPost",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(PostsController.createPost)
 );
