@@ -8,7 +8,7 @@ const app = express();
 const server = require('http').createServer(app);
 
 const Mongo = require('./config/mongoose');
-// const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('./middlewares/authMiddleware');
 const RouterAPI = require('./router/router');
 
 require('dotenv').config();
@@ -24,7 +24,7 @@ const setup = async () => {
     await Mongo.setupDb(process.env.MONGO_DB_URI);
 
     app.use('/api', RouterAPI.router);
-    // authMiddleware(app);
+    authMiddleware(app);
 
     server.listen(PORT, () => {
         console.log(`Server started on ${PORT}`)
