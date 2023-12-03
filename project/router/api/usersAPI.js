@@ -17,5 +17,9 @@ router.post("/admin/createAdmin",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(UsersController.createAdmin)
 );
+router.post("/admin/deleteAdmin",
+    passport.authenticate('jwt', { session: false }),
+    apiWrapper(UsersController.deleteAdmin)
+);
 
 module.exports = { router };
