@@ -11,7 +11,7 @@ module.exports.deleteAdmin = async (req, res) => {
             const userExist = await UsersModel.findOne({ u_Id });
             if (!userExist) {
                 return res.status(404).send({ message: "There are no entries with such 'User ID'." })
-            } else if (user.u_AccessLevel === 1) {
+            } else if (userExist.u_AccessLevel === 1) {
                 return res.status(403).send({ message: "You can't delete superuser. Please contact technical administrator." });
             } else {
                 const deletedUser = await UsersModel.findOneAndDelete({ u_Id });
