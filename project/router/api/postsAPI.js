@@ -13,5 +13,9 @@ router.post("/admin/deletePost",
     apiWrapper(PostsController.deletePost)
 );
 router.get("/getPosts", apiWrapper(PostsController.getPosts));
+router.patch("/admin/editPost",
+    passport.authenticate('jwt', { session: false }),
+    apiWrapper(PostsController.editPost)
+);
 
 module.exports = { router };
