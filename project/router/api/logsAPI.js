@@ -8,9 +8,9 @@ router.get("/admin/getLogs",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(LogsController.getLogs)
 );
-router.delete("/admin/gotozero",
+router.delete("/admin/cleanLogs",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(LogsController.gotozero)
+    apiWrapper(LogsController.cleanLogs)
 );
 
 module.exports = { router };

@@ -9,5 +9,4 @@ router.use(UsersAPI.router);
 router.use(PostsAPI.router);
 router.use(LogsAPI.router);
 
-
 module.exports = { router };

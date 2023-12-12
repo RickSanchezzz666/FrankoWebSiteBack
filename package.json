@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^1.6.2",
+    "@img/sharp-win32-x64": "^0.33.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -12,10 +12,12 @@
     "nodemon": "^3.0.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "sharp": "^0.33.0",
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "start": "npx nodemon ./project/server.js"
+    "dev": "npx nodemon ./project/server.js",
+    "start": "node ./project/server.js"
   },
   "devDependencies": {
     "eslint": "^8.53.0"
