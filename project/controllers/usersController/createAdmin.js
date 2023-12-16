@@ -15,7 +15,7 @@ module.exports.createAdmin = async (req, res) => {
             if (!Fullname) {
                 return res.status(400).send({ message: "Parameter 'Fullname' is required." });
             }
-            const existingUser = await UsersModel.findOne(Login);
+            const existingUser = await UsersModel.findOne({ Login: Login });
             if (existingUser) {
                 return res.status(409).send({ message: "User with this login already exists." });
             }

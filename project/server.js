@@ -20,8 +20,8 @@ app.use(cors());
 const setup = async () => {
     await Mongo.setupDb(process.env.MONGO_DB_URI);
 
-    app.use('/api', RouterAPI.router);
     authMiddleware(app);
+    app.use('/api', RouterAPI.router);
 
     server.listen(PORT, () => {
         console.log(`Server started on ${PORT}`)

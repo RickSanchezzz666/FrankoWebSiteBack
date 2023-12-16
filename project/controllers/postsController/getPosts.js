@@ -1,3 +1,5 @@
+// DISABLED (router.js)
+
 const { ContentModel } = require('../../models/contentModel');
 const { loggerModule } = require('../logger');
 
