@@ -6,7 +6,7 @@ const PostsAPI = require('./api/postsAPI');
 const LogsAPI = require('./api/logsAPI');
 
 router.use(UsersAPI.router);
-// router.use(PostsAPI.router);
+router.use(PostsAPI.router);
 router.use(LogsAPI.router);
 
 module.exports = { router };

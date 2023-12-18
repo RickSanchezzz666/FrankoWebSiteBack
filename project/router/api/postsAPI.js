@@ -13,9 +13,9 @@ router.delete("/admin/deletePost",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(PostsController.deletePost)
 );
-router.patch("/admin/editPost",
+/* router.patch("/admin/editPost",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(PostsController.editPost)
-);
+); */
 
 module.exports = { router };

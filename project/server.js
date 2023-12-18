@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const server = require('http').createServer(app);
@@ -22,6 +20,7 @@ const setup = async () => {
 
     authMiddleware(app);
     app.use('/api', RouterAPI.router);
+    app.use('/uploads', express.static('uploads'));
 
     server.listen(PORT, () => {
         console.log(`Server started on ${PORT}`)
