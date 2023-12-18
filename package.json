@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -9,13 +8,14 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1",
     "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "uuid": "^9.0.1"
+    "passport-jwt": "^4.0.1"
   },
   "scripts": {
-    "start": "npx nodemon ./project/server.js"
+    "dev": "npx nodemon ./project/server.js",
+    "start": "node ./project/server.js"
   },
   "devDependencies": {
     "eslint": "^8.53.0"

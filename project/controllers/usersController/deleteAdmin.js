@@ -1,25 +1,26 @@
 const { UsersModel } = require('../../models/usersModel');
 const { loggerModule } = require('../logger');
+const mongoose = require('mongoose');
 
 module.exports.deleteAdmin = async (req, res) => {
     try {
-        if (req.user.u_AccessLevel === 1) {
-            const { u_Id } = req.body;
-            if (!u_Id) {
-                return res.status(400).send({ message: "Parameter 'User Id' is required." })
+        if (req.user.AccessLevel === 1) {
+            const { userId } = req.body;
+            if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+                return res.status(400).send({ message: "Invalid or missing 'User Id'." });
             }
-            const userExist = await UsersModel.findOne({ u_Id });
+            const userExist = await UsersModel.findById(userId);
             if (!userExist) {
                 return res.status(404).send({ message: "There are no entries with such 'User ID'." })
-            } else if (user.u_AccessLevel === 1) {
+            } else if (user.AccessLevel === 1) {
                 return res.status(403).send({ message: "You can't delete superuser. Please contact technical administrator." });
             } else {
-                const deletedUser = await UsersModel.findOneAndDelete({ u_Id });
-                await loggerModule(`Користувач '${deletedUser.u_Fullname}' успішно видалений`, req.user.u_Login);
-                return res.status(200).send({ message: `User '${deletedUser.u_Fullname}' successfully deleted.` });
+                const deletedUser = await UsersModel.findByIdAndDelete(userId);
+                await loggerModule(`Користувач '${deletedUser.Fullname}' успішно видалений`, req.user.Login);
+                return res.status(200).send({ message: `User '${deletedUser.Fullname}' successfully deleted.` });
             }
         } else {
-            await loggerModule(`Користувач ${req.user.u_Fullname} спробував видалити користувача`, "Console");
+            await loggerModule(`Користувач ${req.user.Fullname} спробував видалити користувача`, "Console");
             return res.status(403).send({ message: "Your access level is not enough."});
         };
     } catch (err) {

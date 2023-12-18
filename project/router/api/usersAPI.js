@@ -17,7 +17,7 @@ router.post("/admin/createAdmin",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(UsersController.createAdmin)
 );
-router.post("/admin/deleteAdmin",
+router.delete("/admin/deleteAdmin",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(UsersController.deleteAdmin)
 );
