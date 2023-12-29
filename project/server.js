@@ -16,15 +16,17 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const setup = async () => {
-    await Mongo.setupDb(process.env.MONGO_DB_URI);
+	await Mongo.setupDb(process.env.MONGO_DB_URI);
 
-    authMiddleware(app);
-    app.use('/api', RouterAPI.router);
-    app.use('/uploads', express.static('uploads'));
+	authMiddleware(app);
 
-    server.listen(PORT, () => {
-        console.log(`Server started on ${PORT}`)
-    });
+	// setInterval(sendHeartbeat, 600000);
+
+	app.use('/api', RouterAPI.router);
+
+	server.listen(PORT, () => {
+		console.log(`Server started on ${PORT}`)
+	});
 };
 
 module.exports = setup();
