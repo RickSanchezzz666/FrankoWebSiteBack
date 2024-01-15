@@ -5,6 +5,10 @@ const passport = require('passport');
 const router = Router();
 
 router.get("/getPosts/:postId?", apiWrapper(PostsController.getPosts));
+router.get("/admin/getPost/:postId?",
+    passport.authenticate('jwt', { session: false }),
+    apiWrapper(PostsController.getPostAdmin)
+);
 router.post("/admin/createPost",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(PostsController.createPost)

@@ -8,22 +8,22 @@ module.exports.getPosts = async (req, res) => {
         const { lang } = req.query;
 
         if (!postId) {
-            const selector = lang === 'en' ? 'English' : 'Ukrainian';
+            const selector = lang === 'en' ? 'english' : 'ukrainian';
 
             let posts = await ContentModel.find({}, {
-                [selector]: { 'Title': 1, 'ShortDescription': 1 },
-                'Timestamp': 1,
-                'Photos': { $slice: 1 }
+                [selector]: { 'title': 1, 'shortDescription': 1 },
+                'timestamp': 1,
+                'photos': { $slice: 1 }
             }).sort({ 'Timestamp': -1 });
             
             posts = posts.map(post => {
                 const languageContent = post[selector];
                 return {
                     _id: post._id,
-                    Title: languageContent.Title,
-                    ShortDescription: languageContent.ShortDescription,
-                    Timestamp: post.Timestamp,
-                    Photos: post.Photos.length > 0 ? post.Photos[0].replace(/(\/upload\/)/, '$1t_min-amif/') : []
+                    title: languageContent.title,
+                    shortDescription: languageContent.shortDescription,
+                    timestamp: post.timestamp,
+                    photos: post.photos.length > 0 ? post.photos[0].replace(/(\/upload\/)/, '$1t_min-amif/') : []
                 };
             });
 
@@ -36,12 +36,12 @@ module.exports.getPosts = async (req, res) => {
             const post = await ContentModel.findById(postId);
 
             if (post) {
-                const selector = lang === 'en' ? post.English : post.Ukrainian;
+                const selector = lang === 'en' ? post.english : post.ukrainian;
 
                 const responsePost = {
                     ...selector,
-                    Timestamp: post.Timestamp,
-                    Photos: post.Photos,
+                    timestamp: post.timestamp,
+                    photos: post.photos,
                 };
 
                 return res.status(200).send(responsePost);

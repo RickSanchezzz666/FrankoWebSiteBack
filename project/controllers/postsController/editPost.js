@@ -2,7 +2,6 @@ const { ContentModel } = require('../../models/contentModel');
 const { loggerModule } = require('../logger');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
-const mime = require('mime-types');
 const multer = require('multer');
 
 cloudinary.config({
@@ -25,7 +24,7 @@ const upload = multer({
         }
     },
     limits: { fileSize: process.env.PHOTO_MAX_SIZE }
-}).array('Photos', 10);
+}).array('photos', 10);
 
 module.exports.editPost = (req, res) => {
     upload(req, res, async function(err) {
@@ -38,12 +37,12 @@ module.exports.editPost = (req, res) => {
             } else if (err.message === "Invalid file type") {
                 errorMessage = "Недійсний формат файлу (дозволені: jpeg, jpg, png)";
             }
-            await loggerModule(`UploadError: Користувач ${req.user.Fullname} спробував завантажити файли та отримав помилку: ${errorMessage}`, "Console");
+            await loggerModule(`UploadError: Користувач ${req.user.fullName} спробував завантажити файли та отримав помилку: ${errorMessage}`, "Console");
             return res.status(400).send({ message: errorMessage });
         }
 
         try {
-            const { postId, UkrTitle, UkrDescription, UkrShortDescription, EngTitle, EngDescription, EngShortDescription } = req.body;
+            const { postId, ukrTitle, ukrDescription, ukrShortDescription, engTitle, engDescription, engShortDescription } = req.body;
             if (!postId || !mongoose.Types.ObjectId.isValid(postId)) {
                 return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор публікації" });
             }
@@ -54,20 +53,20 @@ module.exports.editPost = (req, res) => {
             }
 
             let update = {
-                Ukrainian: { ...post.Ukrainian },
-                English: { ...post.English },
+                ukrainian: { ...post.ukrainian },
+                english: { ...post.english },
             };
 
-            if (UkrTitle !== undefined) update.Ukrainian.Title = UkrTitle;
-            if (UkrDescription !== undefined) update.Ukrainian.Description = UkrDescription;
-            if (UkrShortDescription !== undefined) update.Ukrainian.ShortDescription = UkrShortDescription;
-            if (EngTitle !== undefined) update.English.Title = EngTitle;
-            if (EngDescription !== undefined) update.English.Description = EngDescription;
-            if (EngShortDescription !== undefined) update.English.ShortDescription = EngShortDescription;
+            if (ukrTitle !== undefined) update.ukrainian.title = ukrTitle;
+            if (ukrDescription !== undefined) update.ukrainian.description = ukrDescription;
+            if (ukrShortDescription !== undefined) update.ukrainian.shortDescription = ukrShortDescription;
+            if (engTitle !== undefined) update.english.title = engTitle;
+            if (engDescription !== undefined) update.english.description = engDescription;
+            if (engShortDescription !== undefined) update.english.shortDescription = engShortDescription;
 
-            let photoURLs = post.Photos;
+            let photoURLs = post.photos;
             if (req.files && req.files.length > 0) {
-                const deletePromises = post.Photos.map(photoUrl => {
+                const deletePromises = post.photos.map(photoUrl => {
                     const publicId = photoUrl.split('/').pop().split('.')[0];
                     return cloudinary.uploader.destroy(publicId);
                 });
@@ -87,15 +86,15 @@ module.exports.editPost = (req, res) => {
 
                 photoURLs = await Promise.all(uploads);
             }
-            update.Photos = photoURLs;
+            update.photos = photoURLs;
 
-            if (req.user.AccessLevel === 0 || req.user.AccessLevel === 1) {
+            if (req.user.accessLevel === 0 || req.user.accessLevel === 1) {
                 await ContentModel.findByIdAndUpdate(postId, update);
 
-                await loggerModule(`Публікація з ID ${postId} оновлена`, req.user.Login);
+                await loggerModule(`Публікація з ID ${postId} оновлена`, req.user.login);
                 res.status(200).send({ message: "Публікація успішно оновлена!" });
             } else {
-                await loggerModule(`Користувач ${req.user.Fullname} спробував оновити публікацію`, "Console");
+                await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував оновити публікацію`, "Console");
                 return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
             }
         } catch (err) {

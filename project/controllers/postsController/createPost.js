@@ -1,7 +1,6 @@
 const { ContentModel } = require('../../models/contentModel');
 const { loggerModule } = require('../logger');
 const multer = require('multer');
-const mime = require('mime-types');
 const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
@@ -25,7 +24,7 @@ const upload = multer({
         }
     },
     limits: { fileSize: process.env.PHOTO_MAX_SIZE }
-}).array('Photos', 10);
+}).array('photos', 10);
 
 module.exports.createPost = (req, res) => {
     upload(req, res, async function(err) {
@@ -38,12 +37,12 @@ module.exports.createPost = (req, res) => {
             } else if (err.message === "Invalid file type") {
                 errorMessage = "Недійсний формат файлу (дозволені: jpeg, jpg, png)";
             }
-            await loggerModule(`UploadError: Користувач ${req.user.Fullname} спробував завантажити файли та отримав помилку: ${errorMessage}`, "Console");
+            await loggerModule(`UploadError: Користувач ${req.user.fullName} спробував завантажити файли та отримав помилку: ${errorMessage}`, "Console");
             return res.status(400).send({ message: errorMessage });
         }
 
         if (!req.files || req.files.length === 0) {
-            await loggerModule(`UploadError: Користувач ${req.user.Fullname} спробував завантажити файли та отримав помилку: Завантажте принаймні 1 фото`, "Console");
+            await loggerModule(`UploadError: Користувач ${req.user.fullName} спробував завантажити файли та отримав помилку: Завантажте принаймні 1 фото`, "Console");
             return res.status(400).send({ message: "Будь ласка завантажте принаймні 1 фото" });
         }
 
@@ -65,33 +64,33 @@ module.exports.createPost = (req, res) => {
 
             const photoURLs = await Promise.all(uploads);
 
-            if (req.user.AccessLevel === 0 || req.user.AccessLevel === 1) {
-                const { UkrTitle, UkrDescription, UkrShortDescription, EngTitle, EngDescription, EngShortDescription } = req.body;
-                if (!UkrTitle || !UkrDescription || !UkrShortDescription || !EngTitle || !EngDescription || !EngShortDescription) {
+            if (req.user.accessLevel === 0 || req.user.accessLevel === 1) {
+                const { ukrTitle, ukrDescription, ukrShortDescription, engTitle, engDescription, engShortDescription } = req.body;
+                if (!ukrTitle || !ukrDescription || !ukrShortDescription || !engTitle || !engDescription || !engShortDescription) {
                     return res.status(400).send({ message: "Будь ласка заповніть всі поля" });
                 }
 
                 const newPost = new ContentModel({
-                    Ukrainian: {
-                        Title: UkrTitle, 
-                        Description: UkrDescription, 
-                        ShortDescription: UkrShortDescription
+                    ukrainian: {
+                        title: ukrTitle, 
+                        description: ukrDescription, 
+                        shortDescription: ukrShortDescription
                     },
-                    English: {
-                        Title: EngTitle, 
-                        Description: EngDescription, 
-                        ShortDescription: EngShortDescription
+                    english: {
+                        title: engTitle, 
+                        description: engDescription, 
+                        shortDescription: engShortDescription
                     },
-                    Photos: photoURLs,
-                    Timestamp: new Date()
+                    photos: photoURLs,
+                    timestamp: new Date()
                 });
 
                 const savedPost = await newPost.save();
                 const postId = savedPost._id;
-                await loggerModule(`Публікація з ID ${postId} створена`, req.user.Login);
+                await loggerModule(`Публікація з ID ${postId} створена`, req.user.login);
                 res.status(200).send({ message: "Публікація успішно створена!" });
             } else {
-                await loggerModule(`Користувач ${req.user.Fullname} спробував створити публікацію`, "Console");
+                await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував створити публікацію`, "Console");
                 return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
             }
         } catch (err) {

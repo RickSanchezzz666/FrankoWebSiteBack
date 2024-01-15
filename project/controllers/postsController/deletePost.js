@@ -11,7 +11,7 @@ cloudinary.config({
 
 module.exports.deletePost = async (req, res) => {
     try {
-        if (req.user.AccessLevel === 1 || req.user.AccessLevel === 0) {
+        if (req.user.accessLevel === 1 || req.user.accessLevel === 0) {
             const { postId } = req.body;
             if (!postId || !mongoose.Types.ObjectId.isValid(postId)) {
                 return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор публікації" });
@@ -22,7 +22,7 @@ module.exports.deletePost = async (req, res) => {
                 return res.status(404).send({ message: "Відсутні записи із таким ідентифікатором публікації" });
             }
 
-            const deletePromises = post.Photos.map(photoUrl => {
+            const deletePromises = post.photos.map(photoUrl => {
                 const publicId = photoUrl.split('/').pop().split('.')[0];
                 return cloudinary.uploader.destroy(publicId);
             });
@@ -30,10 +30,10 @@ module.exports.deletePost = async (req, res) => {
             await Promise.all(deletePromises);
 
             await ContentModel.findByIdAndDelete(postId);
-            await loggerModule(`Публікація з ID ${postId} видалена`, req.user.Login);
+            await loggerModule(`Публікація з ID ${postId} видалена`, req.user.login);
             return res.status(200).send({ message: "Публікація успішно видалена!" });
         } else {
-            await loggerModule(`Користувач ${req.user.Fullname} спробував видалити публікацію`, "Console");
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити публікацію`, "Console");
             return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
         }
     } catch (err) {
