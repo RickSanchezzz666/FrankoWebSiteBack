@@ -17,6 +17,11 @@
   },
   "scripts": {
     "dev": "npx nodemon ./project/server.js",
-    "start": "node ./project/server.js"
+    "start": "node ./project/server.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^9.1.5"
   }
 }
