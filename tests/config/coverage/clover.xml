@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1706203805700" clover="3.2.0">
-  <project timestamp="1706203805700" name="All files">
-    <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2" elements="8" coveredelements="8" complexity="0" loc="6" ncloc="6" packages="1" files="1" classes="1"/>
-    <file name="apiWrapper.js" path="/Users/admin/Desktop/Franko_bek/FrankoWebSiteBack/project/router/apiWrapper/apiWrapper.js">
-      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="2" count="2" type="stmt"/>
-      <line num="3" count="1" type="stmt"/>
-      <line num="4" count="1" type="stmt"/>
-      <line num="6" count="1" type="stmt"/>
-      <line num="7" count="1" type="stmt"/>
-    </file>
+<coverage generated="1706216533276" clover="3.2.0">
+  <project timestamp="1706216533276" name="All files">
+    <metrics statements="19" coveredstatements="16" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2" elements="25" coveredelements="20" complexity="0" loc="19" ncloc="19" packages="3" files="3" classes="3"/>
+    <package name="controllers">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="logger.js" path="D:\Repos\FrankoWebSiteBack\project\controllers\logger.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="controllers.logsController">
+      <metrics statements="11" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="cleanLogs.js" path="D:\Repos\FrankoWebSiteBack\project\controllers\logsController\cleanLogs.js">
+        <metrics statements="11" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="models">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="logsModel.js" path="D:\Repos\FrankoWebSiteBack\project\models\logsModel.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

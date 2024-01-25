@@ -12,6 +12,6 @@ module.exports.cleanLogs = async (req, res) => {
             return res.status(403).send({ message: "Ваш рівень доступу недостатній"});
         };
     } catch (err) {
-        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
+        return res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
     }
 };

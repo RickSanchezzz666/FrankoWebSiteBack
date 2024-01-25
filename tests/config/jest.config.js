@@ -4,7 +4,7 @@ const config = {
   collectCoverage: true,
   coverageDirectory: "coverage",
   coverageProvider: "v8",
-  testRegex: '.*\\.test\\.js$',
+  testRegex: '.*\\.spec\\.js$',
 };
 
 module.exports = config;
