@@ -11,12 +11,6 @@ describe('cleanLogs', () => {
         status: jest.fn().mockReturnThis()
     }
 
-    const req = {
-        user:{
-            accessLevel: 2
-        }
-    }
-
     const err = new Error;
     const reqErr = jest.fn().mockImplementation(async () => {throw err})
 
