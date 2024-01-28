@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1706281454170" clover="3.2.0">
-  <project timestamp="1706281454170" name="All files">
-    <metrics statements="16" coveredstatements="11" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="1" elements="21" coveredelements="12" complexity="0" loc="16" ncloc="16" packages="2" files="2" classes="2"/>
+<coverage generated="1706436290841" clover="3.2.0">
+  <project timestamp="1706436290841" name="All files">
+    <metrics statements="16" coveredstatements="14" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1" elements="21" coveredelements="17" complexity="0" loc="16" ncloc="16" packages="2" files="2" classes="2"/>
     <package name="controllers.logsController">
-      <metrics statements="12" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="12" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="cleanLogs.js" path="D:\Repos\FrankoWebSiteBack\project\controllers\logsController\cleanLogs.js">
-        <metrics statements="12" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="12" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="2" falsecount="2"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>

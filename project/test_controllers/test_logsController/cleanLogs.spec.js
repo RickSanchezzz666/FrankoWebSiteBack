@@ -26,4 +26,25 @@ describe('cleanLogs', () => {
             expect(originalLoggerModule).toHaveBeenCalledWith(`Помилка сервера, ${err}`, "Console");
         }
     })
+    it('should be opened and return error 403 and message', async () => {
+        const req = {
+            user: {
+                accessLevel: 2,
+                fullName: "Tommy Vercetti"
+            },
+            query: {
+                key: process.env.LOGS_KEY
+            }
+        } 
+
+        await cleanLogs(req, res);
+
+        originalLoggerModule.mockImplementation(() => Promise.resolve());
+
+        expect(res.status).toHaveBeenCalledWith(403)
+        expect(res.send).toHaveBeenCalledWith({ message: "Ваш рівень доступу недостатній"})
+
+        expect(originalLoggerModule).toHaveBeenCalledWith(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити сервер-лог`, "Console");
+
+    })
 })
