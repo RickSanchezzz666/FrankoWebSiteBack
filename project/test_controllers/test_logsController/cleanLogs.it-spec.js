@@ -3,7 +3,6 @@ const { LogsModel } = require('../../models/logsModel');
 
 const mongoose = require('mongoose');
 
-
 describe('cleanLogs', () => {
     beforeAll(async () => {
         await mongoose.connect(process.env.MONGO_DB_URI, {
