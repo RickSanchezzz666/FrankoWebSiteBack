@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/15</span>
+                <span class='fraction'>10/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/15</span>
+                <span class='fraction'>10/15</span>
             </div>
         
             
@@ -88,43 +88,43 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { LogsModel } = require('../../models/logsModel');
 const { loggerModule } = require('../logger');
 &nbsp;
 module.exports.getLogs = async (req, res) =&gt; {
     try {
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (req.user.accessLevel === 1) {
-            const { key } = <span class="cstat-no" title="statement not covered" >req.query;</span>
-            const dbQuery = <span class="cstat-no" title="statement not covered" >{};</span>
-<span class="cstat-no" title="statement not covered" >            if (key !== process.env.LOGS_KEY) {</span>
+        if (req.user.accessLevel === 1) {
+            const { key } = req.query;
+            const dbQuery = {};
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (key !== process.env.LOGS_KEY) {
 <span class="cstat-no" title="statement not covered" >                dbQuery.log_ByUser = { $ne: 'Console' };</span>
             }
-            const logs = <span class="cstat-no" title="statement not covered" >await LogsModel.find(dbQuery);</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).send(logs);</span>
-        } else {
-            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував отримати сервер-лог`, "Console");
-            return res.status(403).send({ message: "Ваш рівень доступу недостатній"});
+            const logs = await LogsModel.find(dbQuery);
+            return res.status(200).send(logs);
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>{
+<span class="cstat-no" title="statement not covered" >            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував отримати сервер-лог`, "Console");</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(403).send({ message: "Ваш рівень доступу недостатній"});</span>
         };
     } catch (err) {
-        await loggerModule(`Помилка сервера, ${err}`, "Console");
-        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
+<span class="cstat-no" title="statement not covered" >        await loggerModule(`Помилка сервера, ${err}`, "Console");</span>
+<span class="cstat-no" title="statement not covered" >        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })</span>
     }
 };</pre></td></tr></table></pre>
 
@@ -133,7 +133,7 @@ module.exports.getLogs = async (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-02-02T11:09:05.637Z
+                at 2024-02-02T17:14:25.578Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

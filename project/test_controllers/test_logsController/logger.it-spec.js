@@ -29,7 +29,7 @@ describe('logger', () => {
         
         expect(logs.log_Action).toBe(action)
         expect(logs.log_ByUser).toBe(byUSer)
-        expect(logs.log_Timestamp.getTime()).toBeCloseTo(time.getTime(), 0)
+        expect(logs.log_Timestamp.getTime()).toBeCloseTo(time.getTime(), 3)
     })
 
 })

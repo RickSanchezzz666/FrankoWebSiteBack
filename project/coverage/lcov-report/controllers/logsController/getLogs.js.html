@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>20/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>20/22</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,44 +88,44 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const { LogsModel } = require('../../models/logsModel');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">const { LogsModel } = require('../../models/logsModel');
 const { loggerModule } = require('../logger');
 &nbsp;
 module.exports.getLogs = async (req, res) =&gt; {
     try {
-        if (req.user.accessLevel === 1) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >            const { key } = req.query;</span>
-<span class="cstat-no" title="statement not covered" >            const dbQuery = {};</span>
-<span class="cstat-no" title="statement not covered" >            if (key !== process.env.LOGS_KEY) {</span>
+        if (req.user.accessLevel === 1) {
+            const { key } = req.query;
+            const dbQuery = {};
+            if (key !== process.env.LOGS_KEY) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >                dbQuery.log_ByUser = { $ne: 'Console' };</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >            const logs = await LogsModel.find(dbQuery);</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).send(logs);</span>
-<span class="cstat-no" title="statement not covered" >        } else {</span>
-<span class="cstat-no" title="statement not covered" >            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував отримати сервер-лог`, "Console");</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(403).send({ message: "Ваш рівень доступу недостатній"});</span>
+            const logs = await LogsModel.find(dbQuery);
+            return res.status(200).send(logs);
+        } else {
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував отримати сервер-лог`, "Console");
+            return res.status(403).send({ message: "Ваш рівень доступу недостатній"});
         };
     } catch (err) {
-        await loggerModule(`Помилка сервера, ${err}`, "Console")<span class="branch-0 cbranch-no" title="branch not covered" >;</span>
-<span class="cstat-no" title="statement not covered" >        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+        await loggerModule(`Помилка сервера, ${err}`, "Console");
+        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
+    }
 };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -133,7 +133,7 @@ module.exports.getLogs = async (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-31T14:08:46.468Z
+                at 2024-02-02T17:16:27.218Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
