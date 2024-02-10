@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env.test' })
+require('dotenv').config({ path: './testEnv/.env.test' })
 const { createMongoMemoryServer } = require('./mongodb-memory')
 
 module.exports = async () => {

@@ -5,12 +5,7 @@ const mongoose = require('mongoose');
 
 describe('cleanLogs', () => {
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_DB_URI, {
-            auth: {
-                username: process.env.MONGO_DB_LOGIN,
-                password: process.env.MONGO_DB_PASS
-            }
-        });
+        await mongoose.connect(process.env.MONGO_DB_URI);
         console.log('mongoose was connected');
 
         await LogsModel.insertMany([

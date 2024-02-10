@@ -6,13 +6,7 @@ const { MongoMemoryServer } = require('mongodb-memory-server')
 let instance;
 
 module.exports.createMongoMemoryServer = async () => {
-    instance = await MongoMemoryServer.create({
-        auth: {
-            disable: false,
-            customRootName: process.env.MONGO_DB_LOGIN || 'login',
-            customRootPwd: process.env.MONGO_DB_PASS || 'password'
-        }
-    })
+    instance = await MongoMemoryServer.create()
 
     const url = instance.getUri();
 

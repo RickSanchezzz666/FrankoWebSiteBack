@@ -5,12 +5,7 @@ const mongoose = require('mongoose');
 
 describe('logger', () => {
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_DB_URI, {
-            auth: {
-                username: process.env.MONGO_DB_LOGIN,
-                password: process.env.MONGO_DB_PASS
-            }
-        });
+        await mongoose.connect(process.env.MONGO_DB_URI);
         console.log('mongoose was connected');
     })
 
@@ -29,7 +24,7 @@ describe('logger', () => {
         
         expect(logs.log_Action).toBe(action)
         expect(logs.log_ByUser).toBe(byUSer)
-        expect(logs.log_Timestamp.getTime()).toBeCloseTo(time.getTime(), 3)
+        expect(logs.log_Timestamp.getTime()).toBeCloseTo(time.getTime(), 10)
     })
 
 })

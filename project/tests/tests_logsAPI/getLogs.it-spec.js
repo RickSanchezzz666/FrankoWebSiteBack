@@ -1,4 +1,3 @@
-const { query } = require('express');
 const { getLogs } = require('../../controllers/logsController/getLogs')
 const { LogsModel } = require('../../models/logsModel');
 
@@ -6,12 +5,7 @@ const mongoose = require('mongoose');
 
 describe('getLogs', () => {
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_DB_URI, {
-            auth: {
-                username: process.env.MONGO_DB_LOGIN,
-                password: process.env.MONGO_DB_PASS
-            }
-        });
+        await mongoose.connect(process.env.MONGO_DB_URI);
         console.log('mongoose was connected');
 
 
@@ -30,7 +24,7 @@ describe('getLogs', () => {
         await LogsModel.deleteMany();
     })
 
-    describe("should be open", () => {
+    describe("should be opened", () => {
         const res = {
             send: jest.fn(),
             status: jest.fn().mockImplementation(() => res)
@@ -54,12 +48,7 @@ describe('getLogs', () => {
             expect(res.status).toHaveBeenCalledWith(200)
             expect(res.send).toHaveBeenCalledWith(logs)
 
-
-
-
-
         })
-
 
     })
 

@@ -1,7 +1,6 @@
 const { createPost } = require('../../controllers/postsController/createPost')
 const { loggerModule } = require('../../controllers/logger')
 const cloudinary = require('cloudinary').v2;
-const multer = require('multer');
 
 const originalLoggerModule = require('../../controllers/logger').loggerModule;
 jest.mock('../../controllers/logger', () => ({
@@ -60,6 +59,85 @@ describe('createPost', () => {
                 expect(originalLoggerModule).toHaveBeenCalledWith(`File rejected: Invalid file type - ${file.mimetype}`, "Console");
 
             })
+        })
+    })
+    describe("should be opened", () => {
+        const res = {
+            send: jest.fn(),
+            status: jest.fn().mockReturnThis()
+        }
+
+        it("and throw error 500, message and logs", async () => {
+            const req = {
+                user: {
+                    accessLevel: 2,
+                    login: "admin",
+                    fullName: "Rick Sanchez",
+                },
+                body: {
+                    postId: "65a5587967a8ef1ccdb401a9"
+                },
+                files: [
+                    {
+                        "fieldname": "attachments",
+                        "originalname": "report-1557223111148.jpg",
+                        "encoding": "7bit",
+                        "mimetype": "image/jpg",
+                        "destination": "./uploads",
+                        "filename": "attachments-1557223117432",
+                        "path": "uploads\\attachments-1557223117432",
+                        "size": 87477
+                    }
+                ],
+                headers: {}
+            }
+
+            try {
+                await createPost(req, res)
+            } catch (err) {
+                originalLoggerModule.mockImplementation(() => Promise.resolve());
+
+                expect(res.status).toHaveBeenCalledWith(500)
+                expect(res.send).toHaveBeenCalledWith({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
+
+                expect(originalLoggerModule).toHaveBeenCalledWith(`Помилка сервера, ${err}`, "Console");
+            }
+        })
+        it("and throw error 403, message and logs", async () => {
+            const req = {
+                user: {
+                    accessLevel: 2,
+                    login: "admin",
+                    fullName: "Rick Sanchez",
+                },
+                body: {
+                    postId: "65a5587967a8ef1ccdb401a9"
+                },
+                files: [
+                    {
+                        "fieldname": "attachments",
+                        "originalname": "report-1557223111148.jpg",
+                        "encoding": "7bit",
+                        "mimetype": "image/jpg",
+                        "destination": "./uploads",
+                        "filename": "attachments-1557223117432",
+                        "path": "uploads\\attachments-1557223117432",
+                        "size": 87477
+                    }
+                ],
+                headers: {}
+            }
+
+            try {
+                await createPost(req, res)
+            } catch (err) {
+                originalLoggerModule.mockImplementation(() => Promise.resolve());
+
+                expect(res.status).toHaveBeenCalledWith(403)
+                expect(res.send).toHaveBeenCalledWith({ message: "Ваш рівень доступу недостатній" })
+
+                expect(originalLoggerModule).toHaveBeenCalledWith(`Недостатньо прав: Користувач ${req.user.fullName} спробував створити публікацію`, "Console");
+            }
         })
     })
 })
