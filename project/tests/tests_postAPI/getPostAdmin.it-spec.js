@@ -1,9 +1,9 @@
-const { deletePost } = require('../../controllers/postsController/deletePost')
+const { getPostAdmin } = require('../../controllers/postsController/getPostAdmin')
 const { ContentModel } = require('../../models/contentModel')
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-describe('deletePost', () => {
+describe('getPostAdmin', () => {
     beforeAll(async () => {
         await mongoose.connect(process.env.MONGO_DB_URI);
         console.log('mongoose was connected');
@@ -14,9 +14,9 @@ describe('deletePost', () => {
         ]
         await ContentModel.insertMany([
             {
-                _id: new mongoose.Types.ObjectId("65a5587967a8ef1ccdb401a9"),
+                _id: new mongoose.Types.ObjectId("65a5587967a8ef1ccdb401a0"),
                 ukrainian: {
-                    title: "Назва1",
+                    title: "Назва",
                     description: "Опис",
                     shortDescription: "Короткий Опис"
                 },
@@ -33,68 +33,48 @@ describe('deletePost', () => {
 
     afterAll(async () => {
         await ContentModel.deleteMany();
-        console.log('Deleted succesfully!')
     }, 10000)
 
-    describe("should be opened", () => {
+    describe('should be opened', () => {
         const res = {
             send: jest.fn(),
             status: jest.fn().mockReturnThis()
         }
-
-        it("and delete post and return 200, message and logger", async () => {
+        it("and return 200 and send post", async () => {
             const req = {
                 user: {
                     accessLevel: 0,
                     login: "admin0",
                     fullName: "Rick Sanchez",
                 },
-                body: {
-                    postId: "65a5587967a8ef1ccdb401a9"
+                params: {
+                    postId: "65a5587967a8ef1ccdb401a0"
                 }
             }
 
-            await deletePost(req, res)
+            await getPostAdmin(req, res)
 
-            const post = await ContentModel.find({})
+            const post = await ContentModel.findById("65a5587967a8ef1ccdb401a0")
 
             expect(res.status).toHaveBeenCalledWith(200)
-            expect(res.send).toHaveBeenCalledWith({ message: "Публікація успішно видалена!" })
-            expect(post).toStrictEqual([])
+            expect(res.send).toHaveBeenCalledWith(post)
         })
-        it("and return 400 and send message", async () => {
+        it('and return 404 and send message', async () => {
             const req = {
                 user: {
                     accessLevel: 0,
                     login: "admin0",
                     fullName: "Rick Sanchez",
                 },
-                body: {
-                    postId: "123"
-                }
-            }
-
-            await deletePost(req, res)
-
-            expect(res.status).toHaveBeenCalledWith(400)
-            expect(res.send).toHaveBeenCalledWith({ message: "Недійсний або відсутній ідентифікатор публікації" })
-        })
-        it("and return 404 and send message", async () => {
-            const req = {
-                user: {
-                    accessLevel: 0,
-                    login: "admin0",
-                    fullName: "Rick Sanchez",
-                },
-                body: {
+                params: {
                     postId: "65a5587967a8ef1ccdb401a8"
                 }
             }
 
-            await deletePost(req, res)
+            await getPostAdmin(req, res)
 
             expect(res.status).toHaveBeenCalledWith(404)
-            expect(res.send).toHaveBeenCalledWith({ message: "Відсутні записи із таким ідентифікатором публікації" })
+            expect(res.send).toHaveBeenCalledWith({ message: "Публікація з таким ID відсутня" })
         })
     })
 })

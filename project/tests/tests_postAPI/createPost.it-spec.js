@@ -3,6 +3,19 @@ const { ContentModel } = require('../../models/contentModel')
 
 const mongoose = require('mongoose');
 
+describe('createPost', () => {
+    beforeAll(async () => {
+        await mongoose.connect(process.env.MONGO_DB_URI);
+        console.log('mongoose was connected');
+    });
+
+    afterAll(async () => {
+        await ContentModel.deleteMany();
+    }, 10000)
+
+    it("test", () => {})
+})
+
 /*describe('createPost', () => {
     beforeAll(async () => {
         await mongoose.connect(process.env.MONGO_DB_URI);
