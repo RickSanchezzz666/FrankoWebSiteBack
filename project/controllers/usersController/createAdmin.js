@@ -25,8 +25,7 @@ module.exports.createAdmin = async (req, res) => {
             });
 
             const savedAdmin = await newAdmin.save();
-            const newAdminId = savedAdmin._id;
-            await loggerModule(`Новий адміністратор з ID ${newAdminId} був успішно створений`, req.user.login);
+            await loggerModule(`Новий адміністратор '${savedAdmin.fullName}' (ID ${savedAdmin._id}) успішно створений`, req.user.login);
             return res.status(200).send({message: "Ви успішно створили нового адміністратора!"});
         } else {
             await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував створити користувача`, "Console");
