@@ -16,7 +16,7 @@ module.exports.deleteAdmin = async (req, res) => {
                 return res.status(403).send({ message: "Ви не можете видалити цього користувача, зверніться до технічного адміністратора" });
             } else {
                 const deletedUser = await UsersModel.findByIdAndDelete(userId);
-                await loggerModule(`Користувач '${deletedUser.fullName}' успішно видалений`, req.user.login);
+                await loggerModule(`Користувач '${deletedUser.fullName}' (ID ${deletedUser._id}) успішно видалений`, req.user.login);
                 return res.status(200).send({ message: `Користувач '${deletedUser.fullName}' успішно видалений!` });
             }
         } else {
