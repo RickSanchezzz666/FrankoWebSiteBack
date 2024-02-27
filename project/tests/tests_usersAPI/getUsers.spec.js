@@ -1,4 +1,4 @@
-const {getUsers} = require  ('../../controllers/usersController/getUsers')
+const { getUsers } = require  ('../../controllers/usersController/getUsers')
 
 const originalLoggerModule = require('../../controllers/logger').loggerModule;
     jest.mock('../../controllers/logger', () => ({
