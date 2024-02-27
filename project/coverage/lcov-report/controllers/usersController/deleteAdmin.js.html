@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for controllers/logsController/getLogs.js</title>
+    <title>Code coverage report for controllers/usersController/deleteAdmin.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/logsController</a> getLogs.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/usersController</a> deleteAdmin.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>20/22</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/22</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
@@ -84,42 +84,66 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">const { LogsModel } = require('../../models/logsModel');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span></td><td class="text"><pre class="prettyprint lang-js">const { UsersModel } = require('../../models/usersModel');
 const { loggerModule } = require('../logger');
+const mongoose = require('mongoose');
 &nbsp;
-module.exports.getLogs = async (req, res) =&gt; {
+module.exports.deleteAdmin = async (req, res) =&gt; {
     try {
         if (req.user.accessLevel === 1) {
-            const { key } = req.query;
-            const dbQuery = {};
-            if (key !== process.env.LOGS_KEY) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >                dbQuery.log_ByUser = { $ne: 'Console' };</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-            const logs = await LogsModel.find(dbQuery);
-            return res.status(200).send(logs);
+            const { userId } = req.body;
+            if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор користувача" });
+            }
+            const userExist = await UsersModel.findById(userId);
+            if (!userExist) {
+                return res.status(404).send({ message: "Користувач з таким ідентифікатором не знайдений" })
+            } else if (userExist.accessLevel === 1) {
+                return res.status(403).send({ message: "Ви не можете видалити цього користувача, зверніться до технічного адміністратора" });
+            } else {
+                const deletedUser = await UsersModel.findByIdAndDelete(userId);
+                await loggerModule(`Користувач '${deletedUser.fullName}' успішно видалений`, req.user.login);
+                return res.status(200).send({ message: `Користувач '${deletedUser.fullName}' успішно видалений!` });
+            }
         } else {
-            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував отримати сервер-лог`, "Console");
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити користувача`, "Console");
             return res.status(403).send({ message: "Ваш рівень доступу недостатній"});
         };
     } catch (err) {

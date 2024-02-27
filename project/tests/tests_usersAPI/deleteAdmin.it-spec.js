@@ -1,4 +1,3 @@
-const { createAdmin } = require('../../controllers/usersController/createAdmin');
 const { deleteAdmin } = require('../../controllers/usersController/deleteAdmin');
 const { UsersModel } = require('../../models/usersModel');
 
