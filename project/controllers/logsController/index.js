@@ -1,4 +1,4 @@
 module.exports.LogsController = {
-    ...require('./gotozero'),
+    ...require('./cleanLogs'),
     ...require('./getLogs')
 }

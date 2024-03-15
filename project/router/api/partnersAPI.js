@@ -1,16 +1,17 @@
 const { Router } = require('express');
-const { LogsController } = require('../../controllers');
+const { PartnersController } = require('../../controllers');
 const { apiWrapper } = require('../apiWrapper/index');
 const passport = require('passport');
 const router = Router();
 
-router.get("/admin/getLogs",
+router.get("/getPartners", apiWrapper(PartnersController.getPartners));
+router.post("/admin/addPartner",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(LogsController.getLogs)
+    apiWrapper(PartnersController.addPartner)
 );
-router.delete("/admin/cleanLogs",
+router.delete("/admin/deletePartner",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(LogsController.cleanLogs)
+    apiWrapper(PartnersController.deletePartner)
 );
 
 module.exports = { router };

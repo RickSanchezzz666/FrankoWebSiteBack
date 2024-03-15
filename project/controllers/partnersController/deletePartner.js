@@ -1,4 +1,4 @@
-const { ContentModel } = require('../../models/contentModel');
+const { PartnersModel } = require('../../models/partnersModel');
 const { loggerModule } = require('../logger');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
@@ -9,31 +9,31 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-module.exports.deletePost = async (req, res) => {
+module.exports.deletePartner = async (req, res) => {
     try {
         if (req.user.accessLevel === 1 || req.user.accessLevel === 0) {
-            const { postId } = req.body;
-            if (!postId || !mongoose.Types.ObjectId.isValid(postId)) {
-                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор публікації" });
+            const { partnerId } = req.body;
+            if (!partnerId || !mongoose.Types.ObjectId.isValid(partnerId)) {
+                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор партнерської організації" });
             }
-            const post = await ContentModel.findById(postId);
+            const partner = await PartnersModel.findById(partnerId);
 
-            if (!post) {
+            if (!partner) {
                 return res.status(404).send({ message: "Відсутні записи із таким ідентифікатором публікації" });
             }
 
-            const deletePromises = post.photos.map(photoUrl => {
+            const deletePromises = partner.logo.map(photoUrl => {
                 const publicId = photoUrl.split('/').pop().split('.')[0];
                 return cloudinary.uploader.destroy(publicId);
             });
 
             await Promise.all(deletePromises);
 
-            await ContentModel.findByIdAndDelete(postId);
-            await loggerModule(`Публікація з ID ${postId} видалена`, req.user.login);
-            return res.status(200).send({ message: "Публікація успішно видалена!" });
+            await PartnersModel.findByIdAndDelete(partnerId);
+            await loggerModule(`Партнерська організація з ID ${partnerId} видалена`, req.user.login);
+            return res.status(200).send({ message: "Партнерська організація видалена!" });
         } else {
-            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити публікацію`, "Console");
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити партнерську організацію`, "Console");
             return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
         }
     } catch (err) {

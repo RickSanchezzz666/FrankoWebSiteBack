@@ -4,7 +4,7 @@ module.exports.apiWrapper = (handler) => {
             await handler(req, res)
         } catch (err) {
             console.error('ApiWrapper: ', err.toString(), err)
-            return res.status(500).send({message: `Internal server error:${err.toString()}` })
+            return res.status(500).send({message: `Внутрішня помилка сервера: ${err.toString()}` })
         }
     }
 }

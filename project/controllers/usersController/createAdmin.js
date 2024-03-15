@@ -4,33 +4,35 @@ const bcrypt = require('bcrypt');
 
 module.exports.createAdmin = async (req, res) => {
     try {
-        if (req.user.u_AccessLevel === 1) {
-            let idCount = await UsersModel.countDocuments();
-            const { login, password, fullname } = req.body;
-            if (!login) {
-                return res.status(400).send({ message: "Parameter 'login' is required." });
-            } 
-            if (!password) {
-                return res.status(400).send({ message: "Parameter 'password' is required." });
+        if (req.user.accessLevel === 1) {
+            const { login, password, fullName } = req.body;
+            if (!login || !password || !fullName) {
+                return res.status(400).send({ message: "Будь ласка заповніть всі поля" });
             }
-            if (!fullname) {
-                return res.status(400).send({ message: "Parameter 'Fullname' is required." });
-            }
-            const existingUser = await UsersModel.findOne({ u_Login: login });
+
+            const existingUser = await UsersModel.findOne({ login });
             if (existingUser) {
-                return res.status(409).send({ message: "User with this login already exists." });
+                return res.status(409).send({ message: "Користувач з цим логіном вже існує" });
             }
+
             const salt = await bcrypt.genSalt(10)
-            const encryptedPassword = await bcrypt.hash(password, salt)
-            const newAdmin = new UsersModel({ u_Id: idCount + 1, u_Login: login, u_Password: encryptedPassword, u_Fullname: fullname, u_AccessLevel: 0 });
-            await newAdmin.save();
-            return res.status(200).send({message: "You successfully created an Admin!"});
+            const encryptedpassword = await bcrypt.hash(password, salt)
+            const newAdmin = new UsersModel({
+                login,
+                password: encryptedpassword,
+                fullName,
+                accessLevel: 0
+            });
+
+            const savedAdmin = await newAdmin.save();
+            await loggerModule(`Новий адміністратор '${savedAdmin.fullName}' (ID ${savedAdmin._id}) успішно створений`, req.user.login);
+            return res.status(200).send({message: "Ви успішно створили нового адміністратора!"});
         } else {
-            await loggerModule(`Користувач ${req.user.u_Fullname} спробував створити користувача`, "Console");
-            return res.status(403).send({ message: "Your access level is not enough." });
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував створити користувача`, "Console");
+            return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
         };
     } catch (err) {
         await loggerModule(`Помилка сервера, ${err}`, "Console");
-        res.status(500).send({ message: "Internal server error" })
+        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
     }
 }

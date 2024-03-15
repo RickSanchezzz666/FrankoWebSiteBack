@@ -1,16 +1,17 @@
 const { Router } = require('express');
-const { LogsController } = require('../../controllers');
+const { MuseumsController } = require('../../controllers');
 const { apiWrapper } = require('../apiWrapper/index');
 const passport = require('passport');
 const router = Router();
 
-router.get("/admin/getLogs",
+router.get("/getMuseums", apiWrapper(MuseumsController.getMuseums));
+router.post("/admin/addMuseum",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(LogsController.getLogs)
+    apiWrapper(MuseumsController.addMusuem)
 );
-router.delete("/admin/cleanLogs",
+router.delete("/admin/deleteMusuem",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(LogsController.cleanLogs)
+    apiWrapper(MuseumsController.deleteMusuem)
 );
 
 module.exports = { router };
