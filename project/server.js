@@ -15,13 +15,21 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({origin: "*"}));
 
 const setup = async () => {
     await Mongo.setupDb(process.env.MONGO_DB_URI);
 
-    app.use('/api', RouterAPI.router);
     authMiddleware(app);
+
+    app.use('/api', RouterAPI.router);
+
+    app.use((err, req, res, next) => {
+        if (err.type === 'entity.too.large') {
+            return res.status(413).send('Надто довгий запит');
+        }
+        next(err);
+    });
 
     server.listen(PORT, () => {
         console.log(`Server started on ${PORT}`)

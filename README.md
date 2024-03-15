@@ -13,7 +13,7 @@ Make sure to create descriptive branch names that reflect the nature of the chan
 
 ## Running the Project
 To run the project locally, execute the following command:
-```npm run start```
+```npm run dev```
 
 This command will start the necessary processes and launch the project.
 
