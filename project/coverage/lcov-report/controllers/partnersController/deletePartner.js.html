@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for controllers/postsController/deletePost.js</title>
+    <title>Code coverage report for controllers/partnersController/deletePartner.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/postsController</a> deletePost.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/partnersController</a> deletePartner.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.69% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/43</span>
+                <span class='fraction'>43/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.69% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/43</span>
+                <span class='fraction'>43/43</span>
             </div>
         
             
@@ -130,24 +130,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const { ContentModel } = require('../../models/contentModel');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const { PartnersModel } = require('../../models/partnersModel');
 const { loggerModule } = require('../logger');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2;
@@ -158,31 +158,31 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 &nbsp;
-module.exports.deletePost = async (req, res) =&gt; {
+module.exports.deletePartner = async (req, res) =&gt; {
     try {
         if (req.user.accessLevel === 1 || req.user.accessLevel === 0) {
-            const { postId } = req.body;
-            if (!postId || !mongoose.Types.ObjectId.isValid(postId)) {
-                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор публікації" });
+            const { partnerId } = req.body;
+            if (!partnerId || !mongoose.Types.ObjectId.isValid(partnerId)) {
+                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор партнерської організації" });
             }
-            const post = await ContentModel.findById(postId);
+            const partner = await PartnersModel.findById(partnerId);
 &nbsp;
-            if (!post) {
+            if (!partner) {
                 return res.status(404).send({ message: "Відсутні записи із таким ідентифікатором публікації" });
             }
 &nbsp;
-            const deletePromises = post.photos.map(photoUrl =&gt; {
+            const deletePromises = partner.logo.map(photoUrl =&gt; {
                 const publicId = photoUrl.split('/').pop().split('.')[0];
                 return cloudinary.uploader.destroy(publicId);
             });
 &nbsp;
-            await Promise.all(deletePromises)<span class="branch-0 cbranch-no" title="branch not covered" >;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            await ContentModel.findByIdAndDelete(postId);</span>
-<span class="cstat-no" title="statement not covered" >            await loggerModule(`Публікація з ID ${postId} видалена`, req.user.login);</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).send({ message: "Публікація успішно видалена!" });</span>
+            await Promise.all(deletePromises);
+&nbsp;
+            await PartnersModel.findByIdAndDelete(partnerId);
+            await loggerModule(`Партнерська організація з ID ${partnerId} видалена`, req.user.login);
+            return res.status(200).send({ message: "Партнерська організація видалена!" });
         } else {
-            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити публікацію`, "Console");
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити партнерську організацію`, "Console");
             return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
         }
     } catch (err) {
