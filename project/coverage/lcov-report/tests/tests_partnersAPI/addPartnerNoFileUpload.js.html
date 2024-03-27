@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for controllers/usersController/deleteAdmin.js</title>
+    <title>Code coverage report for tests/tests_partnersAPI/addPartnerNoFileUpload.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">controllers/usersController</a> deleteAdmin.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">tests/tests_partnersAPI</a> addPartnerNoFileUpload.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/30</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -92,63 +92,72 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span></td><td class="text"><pre class="prettyprint lang-js">const { UsersModel } = require('../../models/usersModel');
-const { loggerModule } = require('../logger');
-const mongoose = require('mongoose');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span></td><td class="text"><pre class="prettyprint lang-js">const { PartnersModel } = require('../../models/partnersModel');
+const { loggerModule } = require('../../controllers/logger');
+require('dotenv').config();
 &nbsp;
-module.exports.deleteAdmin = async (req, res) =&gt; {
+module.exports.addPartner = async (req, res) =&gt; {
     try {
-        if (req.user.accessLevel === 1) {
-            const { userId } = req.body;
-            if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
-                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор користувача" });
+        const logoURL = 'url'
+&nbsp;
+        if (req.user.accessLevel === 0 || req.user.accessLevel === 1) {
+            const { name, link } = req.body;
+            if (!name) {
+                return res.status(400).send({ message: "Будь ласка заповніть поле 'name'" });
             }
-            const userExist = await UsersModel.findById(userId);
-            if (!userExist) {
-                return res.status(404).send({ message: "Користувач з таким ідентифікатором не знайдений" })
-            } else if (userExist.accessLevel === 1) {
-                return res.status(403).send({ message: "Ви не можете видалити цього користувача, зверніться до технічного адміністратора" });
-            } else {
-                const deletedUser = await UsersModel.findByIdAndDelete(userId);
-                await loggerModule(`Користувач '${deletedUser.fullName}' (ID ${deletedUser._id}) успішно видалений`, req.user.login);
-                return res.status(200).send({ message: `Користувач '${deletedUser.fullName}' успішно видалений!` });
-            }
+&nbsp;
+            const newPartner = new PartnersModel({
+                name: name,
+                link: link,
+                logo: logoURL
+            });
+&nbsp;
+            const savedPartner = await newPartner.save();
+            const partnerId = savedPartner._id;
+            await loggerModule(`Партнерська організація з ID ${partnerId} додана`, req.user.login);
+            res.status(200).send({ message: "Партнерська організація успішно додана!" });
         } else {
-            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити користувача`, "Console");
-            return res.status(403).send({ message: "Ваш рівень доступу недостатній"});
-        };
+            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував додати партнерську організацію`, "Console");
+            return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
+        }
     } catch (err) {
         await loggerModule(`Помилка сервера, ${err}`, "Console");
-        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
+        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" });
     }
 };</pre></td></tr></table></pre>
 

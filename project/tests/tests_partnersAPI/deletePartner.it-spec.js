@@ -88,8 +88,6 @@ describe('deletePartner', () => {
                 }
             }
 
-            PartnersModel.findByIdAndDelete = jest.fn().mockResolvedValueOnce();
-
             await deletePartner(req, res)
 
             originalLoggerModule.mockImplementation(() => Promise.resolve());

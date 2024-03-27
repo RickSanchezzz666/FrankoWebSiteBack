@@ -1,23 +1,22 @@
-const { deletePartner } = require('../../controllers/partnersController/deletePartner')
-
+const { addPartner } = require('./addPartnerNoFileUpload')
 
 const originalLoggerModule = require('../../controllers/logger').loggerModule;
-    jest.mock('../../controllers/logger', () => ({
-      loggerModule: jest.fn()
-    }));
+jest.mock('../../controllers/logger', () => ({
+    loggerModule: jest.fn()
+}));
 
-describe('deletePartner', () => {
+describe('addPartner', () => {
     const res = {
         send: jest.fn(),
         status: jest.fn().mockReturnThis()
     }
 
     const err = new Error;
-    const reqErr = jest.fn().mockImplementation(async () => {throw err})
+    const reqErr = jest.fn().mockImplementation(async () => { throw err })
 
     it('should be opened and throw error 500 and send message and logs', async () => {
         try {
-            await deletePartner(reqErr, res);
+            await addPartner(reqErr, res);
         } catch (err) {
             originalLoggerModule.mockImplementation(() => Promise.resolve());
 
@@ -36,16 +35,16 @@ describe('deletePartner', () => {
             query: {
                 key: process.env.LOGS_KEY
             }
-        } 
+        }
 
-        await deletePartner(req, res);
+        await addPartner(req, res);
 
         originalLoggerModule.mockImplementation(() => Promise.resolve());
 
         expect(res.status).toHaveBeenCalledWith(403)
-        expect(res.send).toHaveBeenCalledWith({ message: "Ваш рівень доступу недостатній"})
+        expect(res.send).toHaveBeenCalledWith({ message: "Ваш рівень доступу недостатній" })
 
-        expect(originalLoggerModule).toHaveBeenCalledWith(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити партнерську організацію`, "Console");
+        expect(originalLoggerModule).toHaveBeenCalledWith(`Недостатньо прав: Користувач ${req.user.fullName} спробував додати партнерську організацію`, "Console");
 
     })
 })
