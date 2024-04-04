@@ -60,14 +60,17 @@ module.exports.addMuseum = (req, res) => {
             });
 
             if (req.user.accessLevel === 0 || req.user.accessLevel === 1) {
-                const { frontText, rearText, link } = req.body;
-                if (!frontText || !rearText) {
-                    return res.status(400).send({ message: "Будь ласка заповніть поля 'frontText', 'rearText'" });
+                const { title, workingHours, workingDays, phone, address, link } = req.body;
+                if (!title) {
+                    return res.status(400).send({ message: "Будь ласка заповніть поля позначені "*"!" });
                 }
 
                 const newMuseum = new MuseumsModel({
-                    frontText: frontText,
-                    rearText: rearText,
+                    title: title,
+                    workingHours: workingHours,
+                    workingDays: workingDays,
+                    phone: phone,
+                    address: address,
                     link: link,
                     photo: photoURL
                 });
