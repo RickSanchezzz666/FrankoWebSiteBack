@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711543707600" clover="3.2.0">
-  <project timestamp="1711543707601" name="All files">
-    <metrics statements="29" coveredstatements="16" conditionals="10" coveredconditionals="3" methods="2" coveredmethods="1" elements="41" coveredelements="20" complexity="0" loc="29" ncloc="29" packages="2" files="2" classes="2"/>
-    <package name="controllers.partnersController">
-      <metrics statements="25" coveredstatements="12" conditionals="10" coveredconditionals="3" methods="2" coveredmethods="1"/>
-      <file name="deletePartner.js" path="D:\Repos\FrankoWebSiteBack\project\controllers\partnersController\deletePartner.js">
-        <metrics statements="25" coveredstatements="12" conditionals="10" coveredconditionals="3" methods="2" coveredmethods="1"/>
+<coverage generated="1712938426531" clover="3.2.0">
+  <project timestamp="1712938426531" name="All files">
+    <metrics statements="31" coveredstatements="27" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2" elements="39" coveredelements="33" complexity="0" loc="31" ncloc="31" packages="3" files="4" classes="4"/>
+    <package name="controllers">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="logger.js" path="D:\Repos\FrankoWebSiteBack\project\controllers\logger.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="cond" truecount="3" falsecount="1"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
       </file>
     </package>
     <package name="models">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="partnersModel.js" path="D:\Repos\FrankoWebSiteBack\project\models\partnersModel.js">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="logsModel.js" path="D:\Repos\FrankoWebSiteBack\project\models\logsModel.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
+      </file>
+      <file name="museumsModel.js" path="D:\Repos\FrankoWebSiteBack\project\models\museumsModel.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.tests_museumsAPI">
+      <metrics statements="19" coveredstatements="15" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <file name="addMuseumNoFileUpload.js" path="D:\Repos\FrankoWebSiteBack\project\tests\tests_museumsAPI\addMuseumNoFileUpload.js">
+        <metrics statements="19" coveredstatements="15" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
       </file>
     </package>
   </project>
