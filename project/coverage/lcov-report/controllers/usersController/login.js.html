@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.41% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/39</span>
+                <span class='fraction'>39/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.41% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/39</span>
+                <span class='fraction'>39/39</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -107,39 +107,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span></td><td class="text"><pre class="prettyprint lang-js">const { UsersModel } = require('../../models/usersModel');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const { UsersModel } = require('../../models/usersModel');
 const { loggerModule } = require('../logger');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -155,24 +155,24 @@ module.exports.login = async (req, res) =&gt; {
 &nbsp;
         if (!user) {
             return res.status(400).send({ message: 'Хибний логін або пароль' });
-<span class="branch-0 cbranch-no" title="branch not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const passValidity = await bcrypt.compare(password, user.password)</span>
-<span class="cstat-no" title="statement not covered" >        if (!passValidity) {</span>
-<span class="cstat-no" title="statement not covered" >            await loggerModule('Невадала авторизація: хибний пароль', login);</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(400).send({ message: 'Хибний логін або пароль' });</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const token = jwt.sign(</span>
-<span class="cstat-no" title="statement not covered" >            {</span>
-<span class="cstat-no" title="statement not covered" >                _id: user._id,</span>
-<span class="cstat-no" title="statement not covered" >                login: user.login</span>
-<span class="cstat-no" title="statement not covered" >            },</span>
-<span class="cstat-no" title="statement not covered" >            process.env.JWT_KEY,</span>
-<span class="cstat-no" title="statement not covered" >            { expiresIn: process.env.JWT_EXPIRES_IN_HOURS * 60 * 60 });</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        await loggerModule('Користувач авторизувався', user.login);</span>
-<span class="cstat-no" title="statement not covered" >        res.status(200).send({ token });</span>
+        }
+&nbsp;
+        const passValidity = await bcrypt.compare(password, user.password)
+        if (!passValidity) {
+            await loggerModule('Невадала авторизація: хибний пароль', login);
+            return res.status(400).send({ message: 'Хибний логін або пароль' });
+        }
+&nbsp;
+        const token = jwt.sign(
+            {
+                _id: user._id,
+                login: user.login
+            },
+            process.env.JWT_KEY,
+            { expiresIn: process.env.JWT_EXPIRES_IN_HOURS * 60 * 60 });
+&nbsp;
+        await loggerModule('Користувач авторизувався', user.login);
+        res.status(200).send({ token });
     } catch (err) {
         await loggerModule(`Помилка сервера, ${err}`, "Console");
         res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" })
@@ -184,7 +184,7 @@ module.exports.login = async (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-27T12:48:42.030Z
+                at 2024-04-12T16:15:55.406Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
