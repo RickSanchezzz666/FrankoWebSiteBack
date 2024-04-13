@@ -5,7 +5,7 @@ const passport = require('passport');
 const router = Router();
 
 router.get("/getMuseums/:museumId?", apiWrapper(MuseumsController.getMuseums));
-router.get("/admin/getMuseumAdmin/:museumId?",
+router.get("/admin/getMuseum/:museumId?",
     passport.authenticate('jwt', { session: false }),
     apiWrapper(MuseumsController.getMuseumAdmin)
 );
