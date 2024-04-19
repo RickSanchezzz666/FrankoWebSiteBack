@@ -28,13 +28,16 @@ describe('addMuseum', () => {
                     fullName: "Rick Sanchez"
                 },
                 body: {
-                    title: "title",
-                    workingHours: "hours",
-                    workingDays: "days",
-                    phone: "phone",
-                    address: "address",
-                    link: "https://www.link.com/",
-                    photo: ["photo"]
+                    ukrTitle: "назва", 
+                    ukrWorkingHours: "години", 
+                    ukrWorkingDays: "дні", 
+                    ukrAddress: "адреса", 
+                    engTitle: "title", 
+                    engWorkingHours: "hours", 
+                    engWorkingDays: "days", 
+                    engAddress: "address", 
+                    phone: "phone", 
+                    link: "link"
                 }
             }
 

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48% </span>
+                <span class="strong">84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/25</span>
+                <span class='fraction'>21/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/10</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48% </span>
+                <span class="strong">84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/25</span>
+                <span class='fraction'>21/25</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -117,35 +117,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { ContentModel } = require('../../models/contentModel');
 const { loggerModule } = require('../logger');
@@ -160,34 +160,34 @@ cloudinary.config({
 &nbsp;
 module.exports.deletePost = async (req, res) =&gt; {
     try {
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (req.user.accessLevel === 1 || req.user.accessLevel === 0) {
-            const { postId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >            if (!postId || !mongoose.Types.ObjectId.isValid(postId)) {</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор публікації" });</span>
+        if (req.user.accessLevel === 1 || req.user.accessLevel === 0) {
+            const { postId } = req.body;
+            if (!postId || !mongoose.Types.ObjectId.isValid(postId)) {
+                return res.status(400).send({ message: "Недійсний або відсутній ідентифікатор публікації" });
             }
-            const post = <span class="cstat-no" title="statement not covered" >await ContentModel.findById(postId);</span>
+            const post = await ContentModel.findById(postId);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            if (!post) {</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(404).send({ message: "Відсутні записи із таким ідентифікатором публікації" });</span>
+            if (!post) {
+                return res.status(404).send({ message: "Відсутні записи із таким ідентифікатором публікації" });
             }
 &nbsp;
-            const deletePromises = <span class="cstat-no" title="statement not covered" >post.photos.map(<span class="fstat-no" title="function not covered" >ph</span>otoUrl =&gt; {</span>
-                const publicId = <span class="cstat-no" title="statement not covered" >photoUrl.split('/').pop().split('.')[0];</span>
-<span class="cstat-no" title="statement not covered" >                return cloudinary.uploader.destroy(publicId);</span>
+            const deletePromises = post.photos.map(photoUrl =&gt; {
+                const publicId = photoUrl.split('/').pop().split('.')[0];
+                return cloudinary.uploader.destroy(publicId);
             });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            await Promise.all(deletePromises);</span>
+            await Promise.all(deletePromises);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            await ContentModel.findByIdAndDelete(postId);</span>
-<span class="cstat-no" title="statement not covered" >            await loggerModule(`Публікація з ID ${postId} видалена`, req.user.login);</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).send({ message: "Публікація успішно видалена!" });</span>
-        } else {
-            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити публікацію`, "Console");
-            return res.status(403).send({ message: "Ваш рівень доступу недостатній" });
+            await ContentModel.findByIdAndDelete(postId);
+            await loggerModule(`Публікація з ID ${postId} видалена`, req.user.login);
+            return res.status(200).send({ message: "Публікація успішно видалена!" });
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>{
+<span class="cstat-no" title="statement not covered" >            await loggerModule(`Недостатньо прав: Користувач ${req.user.fullName} спробував видалити публікацію`, "Console");</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(403).send({ message: "Ваш рівень доступу недостатній" });</span>
         }
     } catch (err) {
-        await loggerModule(`Помилка сервера, ${err}`, "Console");
-        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" });
+<span class="cstat-no" title="statement not covered" >        await loggerModule(`Помилка сервера, ${err}`, "Console");</span>
+<span class="cstat-no" title="statement not covered" >        res.status(500).send({ message: "Внутрішня помилка сервера, зверніться до технічного адміністратора" });</span>
     }
 };</pre></td></tr></table></pre>
 
@@ -196,7 +196,7 @@ module.exports.deletePost = async (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-19T13:21:21.628Z
+                at 2024-04-19T14:29:44.485Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

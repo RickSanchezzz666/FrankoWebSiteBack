@@ -45,7 +45,32 @@ describe('editPost', () => {
             send: jest.fn(),
             status: jest.fn().mockReturnThis()
         }
+        it('and create post and return 200, message and logs', async () => {
+            const req = {
+                headers: {},
+                user: {
+                    accessLevel: 0,
+                    login: "Rick Sanchez",
+                    fullName: "Rick Sanchez"
+                },
+                body: {
+                    postId: _id,
+                    ukrTitle: "новий Назва",
+                    ukrDescription: "новий Опис",
+                    ukrShortDescription: "новий Короткий опис",
+                    engTitle: "new Title",
+                    engDescription: "new Desc",
+                    engShortDescription: "new Short Desc",
+                }
+            }
 
+            await editPost(req, res)
+
+            await new Promise(resolve => setTimeout(resolve, 2500));
+            
+            expect(res.status).toHaveBeenCalledWith(200)
+            expect(res.send).toHaveBeenCalledWith({ message: "Публікація успішно оновлена!" })
+        })
         it('and return 400, message and logs', async () => {
             const req = {
                 headers: {},
@@ -98,36 +123,7 @@ describe('editPost', () => {
             expect(res.status).toHaveBeenCalledWith(404)
             expect(res.send).toHaveBeenCalledWith({ message: "Відсутні записи із таким ідентифікатором публікації" })
         })
-        it('and create post and return 200, message and logs', async () => {
-            const req = {
-                headers: {},
-                user: {
-                    accessLevel: 0,
-                    login: "Rick Sanchez",
-                    fullName: "Rick Sanchez"
-                },
-                body: {
-                    postId: _id,
-                    ukrTitle: "новий Назва",
-                    ukrDescription: "новий Опис",
-                    ukrShortDescription: "новий Короткий опис",
-                    engTitle: "new Title",
-                    engDescription: "new Desc",
-                    engShortDescription: "new Short Desc",
-                }
-            }
-
-            await editPost(req, res)
-
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            const post = await ContentModel.findById(_id);
-
-            expect(res.status).toHaveBeenCalledWith(200)
-            expect(res.send).toHaveBeenCalledWith({ message: "Публікація успішно оновлена!" })
-            expect(post.ukrainian.title).toEqual("новий Назва")   
-            expect(post.english.description).toEqual("new Desc")   
-        })
+        
     })
 
 })

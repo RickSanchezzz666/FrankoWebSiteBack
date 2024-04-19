@@ -1,16 +1,7 @@
 const { deleteMuseum } = require('../../controllers/museumsController/deleteMuseum')
 const { MuseumsModel } = require('../../models/museumsModel');
-const cloudinary = require('cloudinary').v2;
 
 const mongoose = require('mongoose');
-
-cloudinary.uploader.destroy = jest.fn().mockResolvedValue({ result: "ok" });
-
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
 
 const originalLoggerModule = require('../../controllers/logger').loggerModule;
 jest.mock('../../controllers/logger', () => ({
@@ -26,13 +17,18 @@ describe('deleteMuseum', () => {
         await MuseumsModel.insertMany([
             {
                 _id,
-                title: "title",
-                workingHours: "hours",
-                workingDays: "days",
-                phone: "phone",
-                address: "address",
-                link: "https://www.link.com/",
-                photo: ["photo"]
+                ukrainian: {
+                    title: "назва",
+                    workingHours: "години",
+                    workingDays: "дні",
+                    address: "адреса"
+                },
+                english: {
+                    title: "title",
+                    workingHours: "hours",
+                    workingDays: "days",
+                    address: "address"
+                }
             }
         ])
     })
@@ -98,7 +94,6 @@ describe('deleteMuseum', () => {
 
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.send).toHaveBeenCalledWith({ message: "Карточка музею видалена!" })
-            expect(cloudinary.uploader.destroy).toHaveBeenCalled();
 
             expect(originalLoggerModule).toHaveBeenCalledWith(`Карточка музею з ID ${_id} видалена`, req.user.login);
         })
