@@ -1,4 +1,4 @@
-const { createPost } = require('../../controllers/postsController/createPost')
+const { createPost } = require('./createPostFixed')
 const { loggerModule } = require('../../controllers/logger')
 const cloudinary = require('cloudinary').v2;
 
@@ -70,7 +70,7 @@ describe('createPost', () => {
         it("and throw error 500, message and logs", async () => {
             const req = {
                 user: {
-                    accessLevel: 2,
+                    accessLevel: 1,
                     login: "admin",
                     fullName: "Rick Sanchez",
                 },
