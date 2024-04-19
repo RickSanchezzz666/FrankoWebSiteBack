@@ -22,7 +22,7 @@ module.exports.getMuseums = async (req, res) => {
                 return {
                     _id: museum._id,
                     title: languageContent.title,
-                    workingHours: languageContent.shortDescription,
+                    workingHours: languageContent.workingHours,
                     workingDays: languageContent.workingDays,
                     address: languageContent.address,
                     phone: museum.phone,

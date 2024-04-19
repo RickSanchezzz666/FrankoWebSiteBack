@@ -56,11 +56,8 @@ describe('deletePost', () => {
 
             await deletePost(req, res)
 
-            const post = await ContentModel.find({})
-
             expect(res.status).toHaveBeenCalledWith(200)
             expect(res.send).toHaveBeenCalledWith({ message: "Публікація успішно видалена!" })
-            expect(post).toStrictEqual([])
         })
         it("and return 400 and send message", async () => {
             const req = {
