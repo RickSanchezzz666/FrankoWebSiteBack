@@ -1,11 +1,19 @@
 const { Schema, model } = require('mongoose');
 
 const schema = new Schema({
-    title: { type: String, required: true },
-    workingHours: { type: String },
-    workingDays: { type: String },
+    ukrainian: {
+        title: { type: String, required: true },
+        workingHours: { type: String },
+        workingDays: { type: String },
+        address: { type: String },
+    },
+    english: {
+        title: { type: String, required: true },
+        workingHours: { type: String },
+        workingDays: { type: String },
+        address: { type: String },
+    },
     phone: { type: String },
-    address: { type: String },
     link: { type: String },
     photo: [{ type: String, required: true }]
 });
