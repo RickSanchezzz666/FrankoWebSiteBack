@@ -4,14 +4,18 @@ const { apiWrapper } = require('../apiWrapper/index');
 const passport = require('passport');
 const router = Router();
 
-router.get("/getMuseums", apiWrapper(MuseumsController.getMuseums));
+router.get("/getMuseums/:museumId?", apiWrapper(MuseumsController.getMuseums));
+router.get("/admin/getMuseum/:museumId?",
+    passport.authenticate('jwt', { session: false }),
+    apiWrapper(MuseumsController.getMuseumAdmin)
+);
 router.post("/admin/addMuseum",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(MuseumsController.addMusuem)
+    apiWrapper(MuseumsController.addMuseum)
 );
-router.delete("/admin/deleteMusuem",
+router.delete("/admin/deleteMuseum",
     passport.authenticate('jwt', { session: false }),
-    apiWrapper(MuseumsController.deleteMusuem)
+    apiWrapper(MuseumsController.deleteMuseum)
 );
 
 module.exports = { router };
