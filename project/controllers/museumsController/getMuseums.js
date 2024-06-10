@@ -11,8 +11,9 @@ module.exports.getMuseums = async (req, res) => {
             const selector = lang === 'en' ? 'english' : 'ukrainian';
 
             let museums = await MuseumsModel.find({}, {
-                [selector]: { 'title': 1, 'workingHours': 1, 'workingDays': 1, 'address': 1},
+                [selector]: { 'title': 1, 'workingHours': 1, 'address': 1},
                 'phone': 1,
+                'email': 1,
                 'link': 1,
                 'photo': { $slice: 1 }
             });
@@ -22,10 +23,10 @@ module.exports.getMuseums = async (req, res) => {
                 return {
                     _id: museum._id,
                     title: languageContent.title,
-                    workingHours: languageContent.shortDescription,
-                    workingDays: languageContent.workingDays,
+                    workingHours: languageContent.workingHours,
                     address: languageContent.address,
                     phone: museum.phone,
+                    email: museum.email,
                     link: museum.link,
                     photo: museum.photo
                 };
@@ -45,6 +46,7 @@ module.exports.getMuseums = async (req, res) => {
                 const responseMuseum = {
                     ...selector,
                     phone: museum.phone,
+                    email: museum.email,
                     link: museum.link,
                     photo: museum.photo,
                 };
