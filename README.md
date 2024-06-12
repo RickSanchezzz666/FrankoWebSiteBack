@@ -1,3 +1,6 @@
+> [!TIP]
+> Dev deploy: amif.server24.space
+
 # Developer Guide
 Below you'll find essential information on how to contribute, manage branches, and run the project.
 
